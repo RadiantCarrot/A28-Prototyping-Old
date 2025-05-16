@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/LuckySixes.unity
+    guid: 7ba01579417635343919b0311b2974bb
+  - enabled: 1
+    path: Assets/Scenes/Pachinko.unity
+    guid: d4fad1cceba7cb244b1b8fca92610482
+  - enabled: 1
+    path: Assets/Scenes/Shuffleboard.unity
+    guid: bad429734453b60488866ec77cae9f83
+  - enabled: 1
+    path: Assets/Scenes/Servin' Plates.unity
+    guid: e59358a2e804e514d8c6fbc38ebcf049
+  m_configObjects: {}
