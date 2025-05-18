@@ -80,4 +80,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Servin' Plates");
         MenuCanvas.SetActive(false);
     }
+
+    public void GoScenePyramid()
+    {
+        SceneManager.LoadScene("Pyramid");
+        MenuCanvas.SetActive(false);
+    }
+
+    public void GoSceneKutiKuti()
+    {
+        SceneManager.LoadScene("KutiKuti");
+        MenuCanvas.SetActive(false);
+    }
 }

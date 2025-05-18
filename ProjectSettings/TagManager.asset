@@ -21,6 +21,10 @@ TagManager:
   - Plate
   - PlateTrigger
   - PlateCounter
+  - Question1MarkBox
+  - Question2MarkBox
+  - Question3MarkBox
+  - Tile
   layers:
   - Default
   - TransparentFX
