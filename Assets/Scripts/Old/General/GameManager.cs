@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public GameObject MenuCanvas;
 
+    public GameObject Panel1;
+    public GameObject Panel2;
+
     public static GameManager Instance
     {
         get
@@ -36,6 +39,19 @@ public class GameManager : MonoBehaviour
         {
             ToggleMenuUI();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (Panel1.activeSelf == false || Panel2.activeSelf == false)
+            {
+                Panel1.SetActive(true);
+                Panel2.SetActive(true);
+            }
+            else
+            {
+                Panel1.SetActive(false);
+                Panel2.SetActive(false);
+            }
+        }
     }
     public void ToggleMenuUI()
     {
@@ -59,6 +75,7 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    #region OldPrototypes
     public void GoSceneLuckySixes()
     {
         SceneManager.LoadScene("LuckySixes");
@@ -90,6 +107,23 @@ public class GameManager : MonoBehaviour
     public void GoSceneKutiKuti()
     {
         SceneManager.LoadScene("KutiKuti");
+        MenuCanvas.SetActive(false);
+    }
+    #endregion
+
+    public void GoSceneLudo()
+    {
+        SceneManager.LoadScene("Ludo");
+        MenuCanvas.SetActive(false);
+    }
+    public void GoSceneBallpit()
+    {
+        SceneManager.LoadScene("Ballpit");
+        MenuCanvas.SetActive(false);
+    }
+    public void GoSceneCardPack()
+    {
+        SceneManager.LoadScene("Card Pack");
         MenuCanvas.SetActive(false);
     }
 }

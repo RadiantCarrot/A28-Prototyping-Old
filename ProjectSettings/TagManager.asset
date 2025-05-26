@@ -62,3 +62,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: LightCast
+    uniqueID: 549036673
+    locked: 0
