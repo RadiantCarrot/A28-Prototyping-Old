@@ -55,6 +55,8 @@ public class MoveCard : MonoBehaviour
         originalPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0);
         originalScale = transform.localScale;
         targetScale = originalScale * 0.5f;
+
+        lockTilting = false;
     }
 
     // Update is called once per frame

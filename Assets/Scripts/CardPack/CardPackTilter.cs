@@ -21,6 +21,9 @@ public class CardPackTilter : MonoBehaviour
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
         CardInstantiator = gameObject.GetComponent<CardInstantiator>();
         moveSpeed = 10f;
+
+        canHideCards = true;
+        canTilt = true;
     }
 
     // Update is called once per frame
