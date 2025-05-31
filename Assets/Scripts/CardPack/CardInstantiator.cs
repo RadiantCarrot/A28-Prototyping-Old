@@ -6,6 +6,7 @@ public class CardInstantiator : MonoBehaviour
 {
     public List <GameObject> cards = new List <GameObject> ();
     public int cardCount = 10;
+    public GameObject cardPack;
 
     public GameObject commonCard;
     public GameObject rareCard;
@@ -35,7 +36,7 @@ public class CardInstantiator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canReveal == true && cards.Count >= 1)
+        if (cards.Count >= 1)
         {
             GameObject lastCard = cards[cards.Count - 1];
             lastCard.SetActive(true);
@@ -48,10 +49,11 @@ public class CardInstantiator : MonoBehaviour
         {
             RandomiseCards();
             GameObject card = Instantiate(cardToInstantiate);
+            cardPack = GameObject.FindGameObjectWithTag("CardPack");
+            card.transform.SetParent(cardPack.transform);
             card.name = "Card " + i.ToString();
             card.GetComponent<SpriteRenderer>().sortingOrder = i;
             card.GetComponent<MoveCard>().cardNumber = i;
-            //cardNumber += 1;
             cards.Add(card);
         }
     }

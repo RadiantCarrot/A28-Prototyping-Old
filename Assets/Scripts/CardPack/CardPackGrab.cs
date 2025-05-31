@@ -11,6 +11,7 @@ public class CardPackGrab : MonoBehaviour
 
     public GameObject flyTarget;
     public GameObject cardPack;
+    public GameObject cardPackTarget;
     public GameObject canvas;
     public GameObject arrow;
 
@@ -38,27 +39,33 @@ public class CardPackGrab : MonoBehaviour
 
         if (canTear == true)
         {
-            if (tearing == true)
+            if (tearing == true) // tearing pack
             {
                 runTimer = true;
+                // pack rip follow mouse
                 gameObject.transform.position = Vector2.Lerp(transform.position, mousePosition, moveSpeed);
             }
-            else
+            else // stop tearing pack
             {
                 if (reset == true)
                 {
+                    // pack rip go back to start point
                     gameObject.transform.position = Vector2.Lerp(transform.position, startPosition, moveSpeed / 2);
                 }
-                else
+                else // pack is fully torn
                 {
+                    // yoink pack rip far away
                     gameObject.transform.position = Vector2.Lerp(transform.position, flyTarget.transform.position, moveSpeed / 2);
                     if (delayPack == true)
                     {
+                        // fast rip
                         StartCoroutine(CardPackDelay());
                     }
                     else
                     {
-                        cardPack.GetComponent<Rigidbody2D>().velocity = -transform.up * moveSpeed * 16;
+                        // slow rip
+                        //cardPack.GetComponent<Rigidbody2D>().velocity = -transform.up * moveSpeed * 16;
+                        cardPack.transform.position = Vector2.Lerp(cardPack.transform.position, cardPackTarget.transform.position, moveSpeed / 10);
                     }
                 }
             }
@@ -67,6 +74,12 @@ public class CardPackGrab : MonoBehaviour
         if (runTimer == true)
         {
             currentTime += Time.deltaTime;
+        }
+
+        if (gameObject.transform.position.z != -1)
+        {
+            // making collider grabbable, for some reason it's getting reset to 0
+            gameObject.transform.position = gameObject.transform.position += new Vector3(0, 0, -1);
         }
     }
 
@@ -88,7 +101,7 @@ public class CardPackGrab : MonoBehaviour
             arrow.SetActive(false);
             runTimer = false;
 
-            if (currentTime < 0.75f)
+            if (currentTime < 0.6f)
             {
                 CardExplode.explode = true;
                 delayPack = true;

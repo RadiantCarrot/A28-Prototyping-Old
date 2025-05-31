@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class MoveCard : MonoBehaviour
@@ -20,6 +22,7 @@ public class MoveCard : MonoBehaviour
     public Vector3 shiftPositionRight;
 
     public CardInstantiator CardInstantiator;
+    public GameObject Anchor;
     public CardPackGrab CardPackGrab;
     public int cardNumber;
 
@@ -52,11 +55,13 @@ public class MoveCard : MonoBehaviour
 
         SetBoardNumber(cardNumber);
 
-        originalPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0);
+        originalPosition = new Vector3(gameObject.transform.parent.position.x, gameObject.transform.parent.position.y - 4, 0);
+        //gameObject.transform.parent = null;
         originalScale = transform.localScale;
         targetScale = originalScale * 0.5f;
 
         lockTilting = false;
+        
     }
 
     // Update is called once per frame
@@ -75,10 +80,21 @@ public class MoveCard : MonoBehaviour
 
     public void CardClicked()
     {
-        lockTilting = true;
-        gameObject.transform.position = Vector2.Lerp(transform.position, boardPosition, moveSpeed * Time.deltaTime);
-        StartCoroutine(Shrink());
-        CardInstantiator.cards.Remove(gameObject);
+        if (canHideCards == true)
+        {
+            foreach (GameObject card in CardInstantiator.cards)
+            {
+                card.SetActive(false);
+            }
+            canHideCards = false;
+        }
+        else
+        {
+            lockTilting = true;
+            gameObject.transform.position = Vector2.Lerp(transform.position, boardPosition, moveSpeed * Time.deltaTime);
+            StartCoroutine(Shrink());
+            CardInstantiator.cards.Remove(gameObject);
+        }
     }
 
     bool IsObjectClicked()
@@ -101,62 +117,62 @@ public class MoveCard : MonoBehaviour
         if (number == 0)
         {
             boardPosition = boardPosition0.transform.position;
-            shiftPositionLeft = new Vector3 (originalPosition.x + 0.4f, originalPosition.y - 2,0);
-            shiftPositionRight = new Vector3(originalPosition.x - 0.4f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3 (originalPosition.x + 0.4f, originalPosition.y - 5,0);
+            shiftPositionRight = new Vector3(originalPosition.x - 0.4f, originalPosition.y - 5, 0);
         }
         if (number == 1)
         {
             boardPosition = boardPosition1.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x + 0.3f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x - 0.3f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x + 0.3f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x - 0.3f, originalPosition.y - 5, 0);
         }
         if (number == 2)
         {
             boardPosition = boardPosition2.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x + 0.2f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x - 0.2f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x + 0.2f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x - 0.2f, originalPosition.y - 5, 0);
         }
         if (number == 3)
         {
             boardPosition = boardPosition3.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x + 0.1f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x - 0.1f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x + 0.1f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x - 0.1f, originalPosition.y - 5, 0);
         }
         if (number == 4)
         {
             boardPosition = boardPosition4.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x + 0f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x - 0f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x + 0f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x - 0f, originalPosition.y - 5, 0);
         }
         if (number == 5)
         {
             boardPosition = boardPosition5.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x - 0.1f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x + 0.1f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x - 0.1f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x + 0.1f, originalPosition.y - 5, 0);
         }
         if (number == 6)
         {
             boardPosition = boardPosition6.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x - 0.2f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x + 0.2f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x - 0.2f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x + 0.2f, originalPosition.y - 5, 0);
         }
         if (number == 7)
         {
             boardPosition = boardPosition7.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x - 0.3f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x + 0.3f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x - 0.3f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x + 0.3f, originalPosition.y - 5, 0);
         }
         if (number == 8)
         {
             boardPosition = boardPosition8.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x - 0.4f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x + 0.4f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x - 0.4f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x + 0.4f, originalPosition.y - 5, 0);
         }
         if (number == 9)
         {
             boardPosition = boardPosition9.transform.position;
-            shiftPositionLeft = new Vector3(originalPosition.x - 0.5f, originalPosition.y - 2, 0);
-            shiftPositionRight = new Vector3(originalPosition.x + 0.5f, originalPosition.y - 2, 0);
+            shiftPositionLeft = new Vector3(originalPosition.x - 0.5f, originalPosition.y - 5, 0);
+            shiftPositionRight = new Vector3(originalPosition.x + 0.5f, originalPosition.y - 5, 0);
         }
     }
 

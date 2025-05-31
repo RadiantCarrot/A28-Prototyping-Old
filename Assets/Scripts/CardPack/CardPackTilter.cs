@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class CardPackTilter : MonoBehaviour
     public Vector3 mousePosition;
     public CardInstantiator CardInstantiator;
     public CardPackGrab CardPackGrab;
+    public bool reset; // card tear return to start point
 
     public float moveSpeed = 10f;
 
@@ -46,33 +48,46 @@ public class CardPackTilter : MonoBehaviour
             }
         }
 
+
         if (MoveCard.lockTilting == false && CardPackGrab.reset == false && canTilt == true)
         {
+            GameObject lastCard = CardInstantiator.cards[CardInstantiator.cards.Count - 1];
+
             if (Input.GetMouseButton(0))
             {
-                if (mousePosition.x < -2)
-                {
-                    foreach (GameObject card in CardInstantiator.cards)
-                    {
-                        card.SetActive(true);
-                        card.transform.position = Vector2.Lerp(card.transform.position, card.GetComponent<MoveCard>().shiftPositionLeft, moveSpeed * Time.deltaTime);
-                    }
-                }
-                else if (mousePosition.x > 2)
-                {
-                    foreach (GameObject card in CardInstantiator.cards)
-                    {
-                        card.SetActive(true);
-                        card.transform.position = Vector2.Lerp(card.transform.position, card.GetComponent<MoveCard>().shiftPositionRight, moveSpeed * Time.deltaTime);
-                    }
-                }
+                TiltCards();
             }
             else
             {
                 foreach (GameObject card in CardInstantiator.cards)
                 {
                     card.transform.position = Vector2.Lerp(card.transform.position, card.GetComponent<MoveCard>().originalPosition, moveSpeed * Time.deltaTime);
+                    
+                    //if (card.gameObject.name != lastCard.gameObject.name)
+                    //{
+                    //    card.SetActive(false);
+                    //}
                 }
+            }
+        }
+    }
+
+    public void TiltCards()
+    {
+        if (mousePosition.x < -2)
+        {
+            foreach (GameObject card in CardInstantiator.cards)
+            {
+                card.SetActive(true);
+                card.transform.position = Vector2.Lerp(card.transform.position, card.GetComponent<MoveCard>().shiftPositionLeft, moveSpeed * Time.deltaTime);
+            }
+        }
+        else if (mousePosition.x > 2)
+        {
+            foreach (GameObject card in CardInstantiator.cards)
+            {
+                card.SetActive(true);
+                card.transform.position = Vector2.Lerp(card.transform.position, card.GetComponent<MoveCard>().shiftPositionRight, moveSpeed * Time.deltaTime);
             }
         }
     }

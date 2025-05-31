@@ -25,6 +25,7 @@ TagManager:
   - Question2MarkBox
   - Question3MarkBox
   - Tile
+  - CardPack
   layers:
   - Default
   - TransparentFX

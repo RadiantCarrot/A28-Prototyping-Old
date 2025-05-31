@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1539261649286181319
 Transform:
   m_ObjectHideFlags: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   shiftPositionLeft: {x: 0, y: 0, z: 0}
   shiftPositionRight: {x: 0, y: 0, z: 0}
   CardInstantiator: {fileID: 0}
+  Anchor: {fileID: 0}
   CardPackGrab: {fileID: 0}
   cardNumber: 0
   cardClicked: 0

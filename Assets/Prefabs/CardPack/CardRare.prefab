@@ -145,10 +145,12 @@ MonoBehaviour:
   shiftPositionLeft: {x: 0, y: 0, z: 0}
   shiftPositionRight: {x: 0, y: 0, z: 0}
   CardInstantiator: {fileID: 0}
+  Anchor: {fileID: 0}
   CardPackGrab: {fileID: 0}
   cardNumber: 0
   cardClicked: 0
   originalPosition: {x: 0, y: 0, z: 0}
+  canHideCards: 1
 --- !u!61 &-7858848144938129032
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -105,7 +105,7 @@ public class CardExplode : MonoBehaviour
     {
         float elapsedTime = 0f;
         Vector2 startPos = card.transform.position;
-        float duration = 0.2f; // adjust to control how long the card moves
+        float duration = 0.15f; // adjust to control how long the card moves
 
         while (elapsedTime < duration)
         {
