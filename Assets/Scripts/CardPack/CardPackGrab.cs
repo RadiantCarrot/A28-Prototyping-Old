@@ -64,8 +64,7 @@ public class CardPackGrab : MonoBehaviour
                     else
                     {
                         // slow rip
-                        //cardPack.GetComponent<Rigidbody2D>().velocity = -transform.up * moveSpeed * 16;
-                        cardPack.transform.position = Vector2.Lerp(cardPack.transform.position, cardPackTarget.transform.position, moveSpeed / 10);
+                        cardPack.transform.position = Vector2.Lerp(cardPack.transform.position, cardPackTarget.transform.position, moveSpeed / 5);
                     }
                 }
             }
@@ -112,7 +111,7 @@ public class CardPackGrab : MonoBehaviour
 
     public IEnumerator CardPackDelay()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.25f);
         cardPack.GetComponent<Rigidbody2D>().velocity = -transform.up * moveSpeed * 32;
     }
 }

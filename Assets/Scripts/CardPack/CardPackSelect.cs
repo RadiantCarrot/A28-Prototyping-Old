@@ -12,12 +12,18 @@ public class CardPackSelect : MonoBehaviour
 
     public CardPackGrab CardPackGrab;
     public GameObject arrow;
+    public GameObject packDetails;
+
+    public CardPackController CardPackController;
 
     // Start is called before the first frame update
     void Start()
     {
         CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
+        CardPackController = GameObject.Find("PackManager").GetComponent<CardPackController>();
+
+        RealTop = GameObject.Find("RealTop");
         StartCoroutine(HideTop());
     }
 
@@ -28,19 +34,30 @@ public class CardPackSelect : MonoBehaviour
         {
             PackClicked();
         }
+
+        if (IsMouseOver())
+        {
+            packDetails.SetActive(true);
+        }
+        else
+        {
+            packDetails.SetActive(false);
+        }
     }
 
     public void PackClicked()
     {
         if (canClick == true)
         {
-            arrow.SetActive(true);
+            //arrow.SetActive(true);
             RealTop.SetActive(true);
             Destroy(FakeTop);
 
             CardInstantiator.InstantiateCards();
             CardPackGrab.canTear = true;
             CardPackGrab.cardPack = gameObject;
+
+            CardPackController.cardpackSelected = true;
 
             canClick = false;
         }
@@ -59,6 +76,14 @@ public class CardPackSelect : MonoBehaviour
             }
         }
         return false;
+    }
+
+    bool IsMouseOver()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D hit = Physics2D.OverlapPoint(mousePos);
+
+        return hit != null && hit.transform == transform;
     }
 
     public IEnumerator HideTop()
