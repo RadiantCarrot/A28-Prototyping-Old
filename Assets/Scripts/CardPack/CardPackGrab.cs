@@ -30,6 +30,7 @@ public class CardPackGrab : MonoBehaviour
     {
         startPosition = gameObject.transform.position;
         CardExplode = GameObject.Find("PackManager").GetComponent<CardExplode>();
+        StartCoroutine(ArrowHider());
     }
 
     // Update is called once per frame
@@ -113,5 +114,11 @@ public class CardPackGrab : MonoBehaviour
     {
         yield return new WaitForSeconds(2.25f);
         cardPack.GetComponent<Rigidbody2D>().velocity = -transform.up * moveSpeed * 32;
+    }
+
+    public IEnumerator ArrowHider()
+    {
+        yield return new WaitForSeconds(0.1f);
+        arrow.SetActive (false);
     }
 }

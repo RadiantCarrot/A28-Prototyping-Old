@@ -43,13 +43,13 @@ public class CardInstantiator : MonoBehaviour
         }
     }
 
-    public void InstantiateCards()
+    public void InstantiateCards(GameObject cardpack)
     {
         for (int i = 0; i < cardCount; i++)
         {
             RandomiseCards();
             GameObject card = Instantiate(cardToInstantiate);
-            cardPack = GameObject.FindGameObjectWithTag("CardPack");
+            cardPack = cardpack;
             card.transform.SetParent(cardPack.transform);
             card.name = "Card " + i.ToString();
             card.GetComponent<SpriteRenderer>().sortingOrder = i;

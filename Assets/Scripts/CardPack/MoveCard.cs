@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class MoveCard : MonoBehaviour
@@ -95,6 +94,13 @@ public class MoveCard : MonoBehaviour
             StartCoroutine(Shrink());
             CardInstantiator.cards.Remove(gameObject);
         }
+    }
+
+    public void CardExplodeMove()
+    {
+        gameObject.transform.position = Vector2.Lerp(transform.position, boardPosition, moveSpeed * Time.deltaTime);
+        StartCoroutine(Shrink());
+        CardInstantiator.cards.Remove(gameObject);
     }
 
     bool IsObjectClicked()
