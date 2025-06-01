@@ -43,6 +43,9 @@ public class CardPackSelect : MonoBehaviour
         mediumScale = bigScale * 0.8f;
         smallScale = bigScale * 0.6f;
         tinyScale = bigScale * 0.4f;
+
+        scalePacks = true;
+        ScalePacks();
     }
 
     // Update is called once per frame
