@@ -6,19 +6,24 @@ public class CardPackSpawnCollider : MonoBehaviour
 {
     public int spawnpointNumber;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //public void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "CardPack")
+    //    {
+    //        other.gameObject.GetComponent<CardPackSelect>().packPosition = spawnpointNumber;
+    //        if (spawnpointNumber == 1)
+    //        {
+    //            other.gameObject.GetComponent<CardPackSelect>().isFrontPack = true;
+    //        }
+    //        else
+    //        {
+    //            other.gameObject.GetComponent<CardPackSelect>().isFrontPack = false;
+    //        }
 
-    public void OnTriggerStay2D(Collider2D other)
+    //    }
+    //}
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "CardPack")
         {
@@ -34,4 +39,6 @@ public class CardPackSpawnCollider : MonoBehaviour
             other.gameObject.GetComponent<CardPackSelect>().packPosition = spawnpointNumber;
         }
     }
+
+
 }

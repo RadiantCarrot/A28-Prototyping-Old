@@ -37,6 +37,8 @@ public class CardPackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cardPacks.Clear();
+        packsToDestroy.Clear();
         InstantiatePacks();
     }
 
@@ -59,24 +61,29 @@ public class CardPackController : MonoBehaviour
             {
                 GameObject cardpack = Instantiate(vlightPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
                 cardPacks.Add(cardpack);
+                cardpack.GetComponent<CardPackSelect>().packType = 1;
                 vlightPackCount--;
             }
             else if (vheavyPackCount != 0)
             {
                 GameObject cardpack = Instantiate(vheavyPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
+                
                 cardPacks.Add(cardpack);
+                cardpack.GetComponent<CardPackSelect>().packType = 4;
                 vheavyPackCount--;
             }
             else if (heavyPackCount != 0)
             {
                 GameObject cardpack = Instantiate(heavyPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
                 cardPacks.Add(cardpack);
+                cardpack.GetComponent<CardPackSelect>().packType = 3;
                 heavyPackCount--;
             }
             else if (lightPackCount != 0)
             {
                 GameObject cardpack = Instantiate(lightPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
                 cardPacks.Add(cardpack);
+                cardpack.GetComponent<CardPackSelect>().packType = 2;
                 lightPackCount--;
             }
             spawnpointIndex++;
@@ -111,7 +118,10 @@ public class CardPackController : MonoBehaviour
             int packIndex = cardPacks.IndexOf(cardpack);
             int targetIndex = WrapIndex(packIndex + indexIncrement, totalSpawnpoints);
 
-            Vector3 targetPos = packSpawnpoints[targetIndex].transform.position;
+            CardPackSpawnCollider cpsc = packSpawnpoints[targetIndex].GetComponent<CardPackSpawnCollider>();
+            Vector3 targetPos = cpsc.transform.position;
+
+            cardpack.GetComponent<CardPackSelect>().packPosition = cpsc.spawnpointNumber;
 
             StartCoroutine(MoveToPosition(cardpack, targetPos, moveDuration));
             cardpack.GetComponent<CardPackSelect>().scalePacks = true;
@@ -129,7 +139,10 @@ public class CardPackController : MonoBehaviour
             int packIndex = cardPacks.IndexOf(cardpack);
             int targetIndex = WrapIndex(packIndex + indexIncrement, totalSpawnpoints);
 
-            Vector3 targetPos = packSpawnpoints[targetIndex].transform.position;
+            CardPackSpawnCollider cpsc = packSpawnpoints[targetIndex].GetComponent<CardPackSpawnCollider>();
+            Vector3 targetPos = cpsc.transform.position;
+
+            cardpack.GetComponent<CardPackSelect>().packPosition = cpsc.spawnpointNumber;
 
             StartCoroutine(MoveToPosition(cardpack, targetPos, moveDuration));
             cardpack.GetComponent<CardPackSelect>().scalePacks = true;

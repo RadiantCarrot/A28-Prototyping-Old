@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Overlays;
 using UnityEngine;
+
 
 public class CardPackSelect : MonoBehaviour
 {
@@ -16,17 +16,18 @@ public class CardPackSelect : MonoBehaviour
     public GameObject packDetails;
 
     public CardPackController CardPackController;
+    public CardPackWeight CardPackWeight;
 
     public int packPosition;
+    public int packType; // 1 for vlight, 2 for light, 3 for heavy, 4 for vheavy
     private int lastPackPosition = -1;
-    public bool scalePacks = false;
 
+    public bool scalePacks = false;
     private Vector3 bigScale;
     private Vector3 mediumScale;
     private Vector3 smallScale;
     private Vector3 tinyScale;
     public float scaleDuration = 0.1f;
-
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class CardPackSelect : MonoBehaviour
         CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
         CardPackController = GameObject.Find("PackManager").GetComponent<CardPackController>();
+        CardPackWeight = GameObject.Find("PackManager").GetComponent<CardPackWeight>();
         arrow = GameObject.Find("Arrow");
 
         RealTop = GameObject.Find("RealTop");
@@ -45,20 +47,21 @@ public class CardPackSelect : MonoBehaviour
         tinyScale = bigScale * 0.4f;
 
         scalePacks = true;
-        ScalePacks();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (scalePacks == true)
+        //if (scalePacks == true)
+        //{
+        if (packPosition != lastPackPosition)
         {
-            if (packPosition != lastPackPosition)
-            {
-                ScalePacks();
-                lastPackPosition = packPosition;
-            }
+            lastPackPosition = packPosition;
+            if(packPosition == 1) isFrontPack = true;
+            else isFrontPack = false;
         }
+        ScalePacks();
+        //}
 
 
         if (IsObjectClicked())
@@ -66,13 +69,9 @@ public class CardPackSelect : MonoBehaviour
             PackClicked();
         }
 
-        if (IsMouseOver() && isFrontPack == true)
+        if (isFrontPack == true)
         {
-            packDetails.SetActive(true);
-        }
-        else
-        {
-            packDetails.SetActive(false);
+            CardPackWeight.UpdateOdds(packType);
         }
     }
 
@@ -84,14 +83,29 @@ public class CardPackSelect : MonoBehaviour
             RealTop.SetActive(true);
             Destroy(FakeTop);
 
-            CardInstantiator.InstantiateCards(gameObject);
-            CardPackGrab.canTear = true;
-            CardPackGrab.cardPack = gameObject;
+            CardPackWeight.ConfirmWeight(packType);
+            if (CardPackWeight.packCost <= CardPackWeight.playerWallet)
+            {
+                CardInstantiator.InstantiateCards(gameObject);
+                CardPackGrab.canTear = true;
+                CardPackGrab.cardPack = gameObject;
 
-            CardPackController.cardpackSelected = true;
+                CardPackController.cardpackSelected = true;
+
+                CardPackWeight.SubtractMoney(CardPackWeight.packCost);
+            }
 
             canClick = false;
         }
+    }
+
+    public void InstantiateCards()
+    {
+        CardInstantiator.InstantiateCards(gameObject);
+        CardPackGrab.canTear = true;
+        CardPackGrab.cardPack = gameObject;
+
+        CardPackController.cardpackSelected = true;
     }
 
     bool IsObjectClicked()
@@ -131,23 +145,23 @@ public class CardPackSelect : MonoBehaviour
         switch (packPosition)
         {
             case 1:
-                targetScale = bigScale;
+                targetScale = LerpTarget(targetScale, bigScale);
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder = 15;
                 break;
             case 2:
             case 8:
-                targetScale = mediumScale;
+                targetScale = LerpTarget(targetScale, mediumScale);
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder = 14;
                 break;
             case 3:
             case 7:
-                targetScale = smallScale;
+                targetScale = LerpTarget(targetScale, smallScale);
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13;
                 break;
             case 4:
             case 5:
             case 6:
-                targetScale = tinyScale;
+                targetScale = LerpTarget(targetScale, tinyScale);
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder = 12;
                 break;
         }
@@ -164,6 +178,12 @@ public class CardPackSelect : MonoBehaviour
         StartCoroutine(ScaleOverTime(targetScale, scaleDuration));
     }
 
+    Vector3 LerpTarget(Vector3 targetScale, Vector3 scaleSize)
+    {
+        targetScale = Vector3.Lerp(targetScale, scaleSize, Time.fixedDeltaTime * 10f);
+        return targetScale;
+    }
+
     private IEnumerator ScaleOverTime(Vector3 targetScale, float duration)
     {
         Vector3 initialScale = transform.localScale;
@@ -172,11 +192,12 @@ public class CardPackSelect : MonoBehaviour
         while (elapsed < duration)
         {
             transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsed / duration);
+            //scalePacks = false;
             elapsed += Time.deltaTime * 5;
             yield return null;
         }
 
         transform.localScale = targetScale; // Snap to final scale
-        scalePacks = false;
+        //scalePacks = true;
     }
 }

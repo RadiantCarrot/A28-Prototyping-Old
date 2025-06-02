@@ -12,7 +12,6 @@ public class CardPackGrab : MonoBehaviour
     public GameObject flyTarget;
     public GameObject cardPack;
     public GameObject cardPackTarget;
-    public GameObject canvas;
     public GameObject arrow;
 
     public bool canTear = false;
@@ -97,7 +96,6 @@ public class CardPackGrab : MonoBehaviour
     {
        if (other.gameObject.name == "RipCollider")
        {
-            canvas.SetActive(false);
             arrow.SetActive(false);
             runTimer = false;
 

@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Card Pack.unity
     guid: c9a04c9190c3bb14ab6175dd50b6fb4b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ludo.unity
     guid: 47b968208ca5cb64aa1cfa32874acc61
   m_configObjects: {}
