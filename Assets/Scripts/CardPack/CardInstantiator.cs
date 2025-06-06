@@ -33,7 +33,7 @@ public class CardInstantiator : MonoBehaviour
     {
         cards.Clear();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
-        CardPackWeight = GameObject.Find("PackManager").GetComponent <CardPackWeight>();
+        CardPackWeight = GameObject.Find("GameManager").GetComponent <CardPackWeight>();
 
         canReveal = true;
     }

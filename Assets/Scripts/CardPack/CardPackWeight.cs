@@ -40,13 +40,18 @@ public class CardPackWeight : MonoBehaviour
     public TMP_Text earnedText;
 
     public GameObject oddsPanel;
+    public bool reassignVariables = true;
+    public GameObject Button;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        CardInstantiator = GetComponent<CardInstantiator>();
+        CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
+        arrow = GameObject.Find("Arrow");
+        Button = GameObject.Find("PackButton");
+        //Button.GetComponent<Button>().onClick.AddListener(ToggleOddsPanel);
 
         originalLegendaryOdds = 1;
         originalEpicOdds = 4;
@@ -62,17 +67,60 @@ public class CardPackWeight : MonoBehaviour
         playerSpent = 0;
         playerEarned = 0;
 
+        oddsPanel = GameObject.Find("OddsPanel");
+        reassignVariables = false;
+
+        packName = GameObject.Find("PackNameText").GetComponent<TextMeshProUGUI>();
+        legendaryText = GameObject.Find("L Text").GetComponent<TextMeshProUGUI>();
+        epicText = GameObject.Find("E Text").GetComponent<TextMeshProUGUI>();
+        rareText = GameObject.Find("R Text").GetComponent<TextMeshProUGUI>();
+        commonText = GameObject.Find("C Text").GetComponent<TextMeshProUGUI>();
+
+        walletText = GameObject.Find("WalletText").GetComponent<TextMeshProUGUI>();
+        spentText = GameObject.Find("SpentText").GetComponent<TextMeshProUGUI>();
+        earnedText = GameObject.Find("EarnedText").GetComponent<TextMeshProUGUI>();
+
         oddsPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (reassignVariables == true)
+        {
+            oddsPanel = GameObject.Find("OddsPanel");
+            if (oddsPanel.activeSelf == true)
+            {
+                packName = GameObject.Find("PackNameText").GetComponent<TextMeshProUGUI>();
+                legendaryText = GameObject.Find("L Text").GetComponent<TextMeshProUGUI>();
+                epicText = GameObject.Find("E Text").GetComponent<TextMeshProUGUI>();
+                rareText = GameObject.Find("R Text").GetComponent<TextMeshProUGUI>();
+                commonText = GameObject.Find("C Text").GetComponent<TextMeshProUGUI>();
+
+                walletText = GameObject.Find("WalletText").GetComponent<TextMeshProUGUI>();
+                spentText = GameObject.Find("SpentText").GetComponent<TextMeshProUGUI>();
+                earnedText = GameObject.Find("EarnedText").GetComponent<TextMeshProUGUI>();
+                oddsPanel.SetActive(false);
+            }
+            CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
+            CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
+            arrow = GameObject.Find("Arrow");
+            Button = GameObject.Find("PackButton");
+            Button.GetComponent<Button>().onClick.AddListener(ToggleOddsPanel);
+
+            reassignVariables = false;
+        }
+
         UpdateText();
 
         if (Input.GetKeyDown(KeyCode.M))
         {
             AddMoney(50);
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            reassignVariables = true;
         }
     }
 
@@ -139,6 +187,11 @@ public class CardPackWeight : MonoBehaviour
 
     public void UpdateOdds(int packType)
     {
+        if (oddsPanel.activeSelf == true)
+        {
+            packName = GameObject.Find("PackNameText").GetComponent<TextMeshProUGUI>();
+        }
+
         switch (packType)
         {
             case 1: // vlight
@@ -183,6 +236,20 @@ public class CardPackWeight : MonoBehaviour
 
     public void UpdateText()
     {
+        if (oddsPanel.activeSelf == true)
+        {
+            packName = GameObject.Find("PackNameText").GetComponent<TextMeshProUGUI>();
+            legendaryText = GameObject.Find("L Text").GetComponent<TextMeshProUGUI>();
+            epicText = GameObject.Find("E Text").GetComponent<TextMeshProUGUI>();
+            rareText = GameObject.Find("R Text").GetComponent<TextMeshProUGUI>();
+            commonText = GameObject.Find("C Text").GetComponent<TextMeshProUGUI>();
+
+            walletText = GameObject.Find("WalletText").GetComponent<TextMeshProUGUI>();
+            spentText = GameObject.Find("SpentText").GetComponent<TextMeshProUGUI>();
+            earnedText = GameObject.Find("EarnedText").GetComponent<TextMeshProUGUI>();
+        }
+
+
         walletText.text = "Wallet: $" + playerWallet.ToString();
         spentText.text = "Spent: $" + playerSpent.ToString();
         earnedText.text = "Earned: $" + playerEarned.ToString();

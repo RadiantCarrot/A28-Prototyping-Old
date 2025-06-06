@@ -35,7 +35,7 @@ public class CardPackSelect : MonoBehaviour
         CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
         CardPackController = GameObject.Find("PackManager").GetComponent<CardPackController>();
-        CardPackWeight = GameObject.Find("PackManager").GetComponent<CardPackWeight>();
+        CardPackWeight = GameObject.Find("GameManager").GetComponent<CardPackWeight>();
         arrow = GameObject.Find("Arrow");
 
         RealTop = GameObject.Find("RealTop");
@@ -52,8 +52,6 @@ public class CardPackSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (scalePacks == true)
-        //{
         if (packPosition != lastPackPosition)
         {
             lastPackPosition = packPosition;
@@ -61,7 +59,6 @@ public class CardPackSelect : MonoBehaviour
             else isFrontPack = false;
         }
         ScalePacks();
-        //}
 
 
         if (IsObjectClicked())
@@ -77,25 +74,26 @@ public class CardPackSelect : MonoBehaviour
 
     public void PackClicked()
     {
-        if (canClick == true && isFrontPack == true)
+        if (CardPackWeight.packCost <= CardPackWeight.playerWallet)
         {
+            if (canClick == true && isFrontPack == true)
+            {
             arrow.SetActive(true);
             RealTop.SetActive(true);
             Destroy(FakeTop);
 
             CardPackWeight.ConfirmWeight(packType);
-            if (CardPackWeight.packCost <= CardPackWeight.playerWallet)
-            {
-                CardInstantiator.InstantiateCards(gameObject);
-                CardPackGrab.canTear = true;
-                CardPackGrab.cardPack = gameObject;
+            
+            CardInstantiator.InstantiateCards(gameObject);
+            CardPackGrab.canTear = true;
+            CardPackGrab.cardPack = gameObject;
 
-                CardPackController.cardpackSelected = true;
+            CardPackController.cardpackSelected = true;
 
-                CardPackWeight.SubtractMoney(CardPackWeight.packCost);
-            }
+            CardPackWeight.SubtractMoney(CardPackWeight.packCost);
 
             canClick = false;
+            }
         }
     }
 
