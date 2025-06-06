@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -165,9 +164,11 @@ public class CardPackController : MonoBehaviour
             obj.transform.position = Vector3.Lerp(start, target, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
+            obj.GetComponent<CardPackSelect>().canClick = false;
         }
 
         obj.transform.position = target; // Snap to exact final position
+        obj.GetComponent<CardPackSelect>().canClick = true;
     }
 
     void HandleMouseDrag()
