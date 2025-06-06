@@ -12,6 +12,7 @@ public class CardExplode : MonoBehaviour
     public CardPackTilter CardPackTilter;
 
     public bool explode = false;
+    public bool lockCardClicking = false;
     public float moveSpeed = 50f;
 
     private Vector3 originalScale;
@@ -36,6 +37,7 @@ public class CardExplode : MonoBehaviour
     {
         if (explode == true)
         {
+            lockCardClicking = true;
             ExplodeCards();
             explode = false;
         }

@@ -23,6 +23,7 @@ public class MoveCard : MonoBehaviour
     public CardInstantiator CardInstantiator;
     public GameObject Anchor;
     public CardPackGrab CardPackGrab;
+    public CardExplode CardExplode;
     public int cardNumber;
 
     public bool cardClicked = false;
@@ -51,6 +52,7 @@ public class MoveCard : MonoBehaviour
 
         CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
+        CardExplode = GameObject.Find("PackManager").GetComponent<CardExplode>();
 
         SetBoardNumber(cardNumber);
 
@@ -71,7 +73,7 @@ public class MoveCard : MonoBehaviour
             cardClicked = true;
         }
 
-        if (cardClicked == true)
+        if (cardClicked == true && CardExplode.lockCardClicking == false)
         {
             CardClicked();
         }
