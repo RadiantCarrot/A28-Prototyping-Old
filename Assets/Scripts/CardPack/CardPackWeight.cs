@@ -64,8 +64,6 @@ public class CardPackWeight : MonoBehaviour
         commonValue = 0.25f; // EV $0.36
 
         playerWallet = 50;
-        playerSpent = 0;
-        playerEarned = 0;
 
         oddsPanel = GameObject.Find("OddsPanel");
         reassignVariables = false;

@@ -24,6 +24,7 @@ public class MoveCard : MonoBehaviour
     public GameObject Anchor;
     public CardPackGrab CardPackGrab;
     public CardExplode CardExplode;
+    public DontDestroyOnLoad DontDestroyOnLoad;
     public int cardNumber;
 
     public bool cardClicked = false;
@@ -53,6 +54,7 @@ public class MoveCard : MonoBehaviour
         CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
         CardExplode = GameObject.Find("PackManager").GetComponent<CardExplode>();
+        DontDestroyOnLoad = GameObject.Find("GameManager").GetComponent<DontDestroyOnLoad>();
 
         SetBoardNumber(cardNumber);
 
@@ -93,6 +95,7 @@ public class MoveCard : MonoBehaviour
         {
             lockTilting = true;
             gameObject.transform.position = Vector2.Lerp(transform.position, boardPosition, moveSpeed * Time.deltaTime);
+            DontDestroyOnLoad.cardsClicked += 1;
             StartCoroutine(Shrink());
             CardInstantiator.cards.Remove(gameObject);
         }

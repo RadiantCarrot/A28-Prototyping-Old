@@ -1,10 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
+    public int cardsClicked = 0;
+    public GameObject ContinueButton;
+
+    public SeedScript SeedScript;
+    public CardPackWeight CardPackWeight;
+
+    public Scene currentScene;
+
+
     private static DontDestroyOnLoad _instance;
     public static DontDestroyOnLoad Instance
     {
@@ -31,11 +39,21 @@ public class DontDestroyOnLoad : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
@@ -45,10 +63,32 @@ public class DontDestroyOnLoad : MonoBehaviour
         {
             RestartScene();
         }
+
+        if (cardsClicked >= 10)
+        {
+            RevealContinueButton();
+        }
     }
 
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void OnSceneLoaded(Scene currentScene, LoadSceneMode mode)
+    {
+        ContinueButton = GameObject.Find("ContinueButton");
+        ContinueButton.GetComponent<Button>().onClick.AddListener(RestartScene);
+        ContinueButton.SetActive(false);
+        cardsClicked = 0;
+        SeedScript = gameObject.GetComponent<SeedScript>();
+        SeedScript.GenerateSeed();
+        CardPackWeight = gameObject.GetComponent<CardPackWeight>();
+        CardPackWeight.reassignVariables = true;
+    }
+
+    public void RevealContinueButton()
+    {
+        ContinueButton.SetActive(true);
     }
 }

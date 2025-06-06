@@ -10,11 +10,13 @@ public class ExplodeCheck : MonoBehaviour
 
     public float moveSpeed = 10f;
 
+    public DontDestroyOnLoad DontDestroyOnLoad;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        DontDestroyOnLoad = GameObject.Find("GameManager").GetComponent<DontDestroyOnLoad>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class ExplodeCheck : MonoBehaviour
         other.transform.localScale = other.transform.localScale * 0.5f;
 
         StartCoroutine(MoveToPosition(other.gameObject, targetPos));
+        DontDestroyOnLoad.cardsClicked += 1;
         positionCount++;
     }
 
