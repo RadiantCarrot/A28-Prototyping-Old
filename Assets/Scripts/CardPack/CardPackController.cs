@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CardPackController : MonoBehaviour
 {
     public List<GameObject> cardPacks = new List<GameObject>();
     public List<GameObject> packSpawnpoints = new List<GameObject>();
+    public GameObject spawnpoint; // Main spawnpoint for upgraded packs 
     public List<GameObject> packsToDestroy = new List<GameObject>();
     public int spawnpointIndex = 0;
 
-    public GameObject vlightPack;
+    public GameObject vlightPack; // 1 for vlight, 2 for light, 3 for heavy, 4 for vheavy
     public GameObject lightPack;
     public GameObject heavyPack;
     public GameObject vheavyPack;
@@ -19,7 +21,6 @@ public class CardPackController : MonoBehaviour
     public int heavyPackCount = 2;
     public int vheavyPackCount = 2;
 
-    public bool cardpackSelected = false;
     public bool canInactivePacks = true;
 
     public int packPosition;
@@ -32,10 +33,16 @@ public class CardPackController : MonoBehaviour
     private bool canDrag = true;
     public float moveDuration = 0.3f;
 
+    public CardInstantiator CardInstantiator;
+    public TMP_Text statusText;
+    public bool hideTop = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        CardInstantiator = gameObject.GetComponent<CardInstantiator>();
+
         cardPacks.Clear();
         packsToDestroy.Clear();
         InstantiatePacks();
@@ -48,8 +55,6 @@ public class CardPackController : MonoBehaviour
         {
             HandleMouseDrag();
         }
-
-        DestroyOtherPacks();
     }
 
     public void InstantiatePacks()
@@ -89,16 +94,54 @@ public class CardPackController : MonoBehaviour
         }
     }
 
-    public void DestroyOtherPacks()
+    public void InstantiateUpgradedPack(int packType)
     {
-        if (cardpackSelected == true && canInactivePacks == true)
+        hideTop = false;
+        statusText.text = "Pack Upgrade!";
+
+        if (packType == 2)
         {
-            foreach (GameObject cardpack in cardPacks)
+            GameObject cardpack = Instantiate(lightPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
+            cardpack.GetComponent<CardPackSelect>().packType = 2;
+            CardInstantiator.InstantiateCards(cardpack);
+        }
+        if (packType == 3)
+        {
+            GameObject cardpack = Instantiate(heavyPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
+            cardpack.GetComponent<CardPackSelect>().packType = 3;
+            CardInstantiator.InstantiateCards(cardpack);
+        }
+        if (packType >= 4)
+        {
+            GameObject cardpack = Instantiate(vheavyPack, spawnpoint.transform.position, spawnpoint.transform.rotation);
+            cardpack.GetComponent<CardPackSelect>().packType = 4;
+            CardInstantiator.InstantiateCards(cardpack);
+        }
+    }
+
+    public void DestroyOtherPacks(bool packUpgraded, int packType) 
+    {
+        if (canInactivePacks == true)
+        {
+            if (packUpgraded == true)
             {
-                if (cardpack.GetComponent<CardPackSelect>().packPosition != 1)
+                InstantiateUpgradedPack(packType);
+
+                foreach (GameObject cardpack in cardPacks)
                 {
                     Destroy(cardpack);
                     canDrag = false;
+                }
+            }
+            else
+            {
+                foreach (GameObject cardpack in cardPacks)
+                {
+                    if (cardpack.GetComponent<CardPackSelect>().packPosition != 1)
+                    {
+                        Destroy(cardpack);
+                        canDrag = false;
+                    }
                 }
             }
 

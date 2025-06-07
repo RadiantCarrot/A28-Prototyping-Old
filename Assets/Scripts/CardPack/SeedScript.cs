@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using TMPro;
-using static UnityEngine.Rendering.ReloadAttribute;
 
 public class SeedScript : MonoBehaviour
 {
@@ -14,7 +10,8 @@ public class SeedScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateSeed();
+        //GenerateSeed();
+        // seed generation called by dontdestroyonload script
     }
 
     // Update is called once per frame

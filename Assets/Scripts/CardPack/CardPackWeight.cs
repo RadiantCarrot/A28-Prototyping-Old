@@ -51,7 +51,6 @@ public class CardPackWeight : MonoBehaviour
         CardPackGrab = GameObject.Find("Anchor").GetComponent<CardPackGrab>();
         arrow = GameObject.Find("Arrow");
         Button = GameObject.Find("PackButton");
-        //Button.GetComponent<Button>().onClick.AddListener(ToggleOddsPanel);
 
         originalLegendaryOdds = 1;
         originalEpicOdds = 4;

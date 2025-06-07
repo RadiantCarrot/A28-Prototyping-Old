@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -29,6 +30,11 @@ public class CardPackSelect : MonoBehaviour
     private Vector3 tinyScale;
     public float scaleDuration = 0.1f;
 
+    public int upgradeThreshold = 5;
+    public bool upgradePack = false;
+    public TMP_Text statusText;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +43,7 @@ public class CardPackSelect : MonoBehaviour
         CardPackController = GameObject.Find("PackManager").GetComponent<CardPackController>();
         CardPackWeight = GameObject.Find("GameManager").GetComponent<CardPackWeight>();
         arrow = GameObject.Find("Arrow");
+        statusText = GameObject.Find("StatusText").GetComponent<TextMeshProUGUI>();
 
         RealTop = GameObject.Find("RealTop");
         StartCoroutine(HideTop());
@@ -76,24 +83,53 @@ public class CardPackSelect : MonoBehaviour
     {
         if (CardPackWeight.packCost <= CardPackWeight.playerWallet)
         {
+            statusText.text = "";
             if (canClick == true && isFrontPack == true)
             {
-            arrow.SetActive(true);
-            RealTop.SetActive(true);
-            Destroy(FakeTop);
+                statusText.text = "";
 
-            CardPackWeight.ConfirmWeight(packType);
-            
-            CardInstantiator.InstantiateCards(gameObject);
-            CardPackGrab.canTear = true;
-            CardPackGrab.cardPack = gameObject;
+                if (packType != 4)
+                {
+                    TryUpgrade();
+                }
 
-            CardPackController.cardpackSelected = true;
+                if (upgradePack == true)
+                {
+                    CardPackWeight.ConfirmWeight(packType + 1);
+                    CardPackController.DestroyOtherPacks(true, packType + 1);
+                }
+                else
+                {
+                    CardPackWeight.ConfirmWeight(packType);
+                    CardPackController.DestroyOtherPacks(false, 1);
+                    CardInstantiator.InstantiateCards(gameObject);
+                }
 
-            CardPackWeight.SubtractMoney(CardPackWeight.packCost);
+                arrow.SetActive(true);
+                RealTop.SetActive(true);
+                Destroy(FakeTop);
 
-            canClick = false;
+                CardPackGrab.canTear = true;
+                CardPackGrab.cardPack = gameObject;
+
+                CardPackWeight.SubtractMoney(CardPackWeight.packCost);
+
+                canClick = false;
             }
+        }
+        else
+        {
+            statusText.text = "Press 'M' to refill wallet";
+        }
+    }
+
+    public void TryUpgrade()
+    {
+        float upgradeAmount = Random.Range(1, 101);
+
+        if (upgradeAmount <= upgradeThreshold)
+        {
+            upgradePack = true;
         }
     }
 
@@ -102,8 +138,6 @@ public class CardPackSelect : MonoBehaviour
         CardInstantiator.InstantiateCards(gameObject);
         CardPackGrab.canTear = true;
         CardPackGrab.cardPack = gameObject;
-
-        CardPackController.cardpackSelected = true;
     }
 
     bool IsObjectClicked()
@@ -132,7 +166,16 @@ public class CardPackSelect : MonoBehaviour
     public IEnumerator HideTop()
     {
         yield return new WaitForSeconds(0.25f);
-        RealTop.SetActive(false);
+        if (CardPackController.hideTop == true)
+        {
+            RealTop.SetActive(false);
+        }
+        else
+        {
+            CardPackGrab.canTear = true;
+            CardPackGrab.cardPack = gameObject;
+            Destroy(FakeTop);
+        }
     }
 
 
