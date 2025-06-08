@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -43,6 +41,9 @@ public class CardPackWeight : MonoBehaviour
     public bool reassignVariables = true;
     public GameObject Button;
 
+    public int legendaryPity = 0;
+    public TMP_Text pityText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,7 @@ public class CardPackWeight : MonoBehaviour
         walletText = GameObject.Find("WalletText").GetComponent<TextMeshProUGUI>();
         spentText = GameObject.Find("SpentText").GetComponent<TextMeshProUGUI>();
         earnedText = GameObject.Find("EarnedText").GetComponent<TextMeshProUGUI>();
+        pityText = GameObject.Find("PityText").GetComponent<TextMeshProUGUI>();
 
         oddsPanel.SetActive(false);
     }
@@ -97,6 +99,7 @@ public class CardPackWeight : MonoBehaviour
                 walletText = GameObject.Find("WalletText").GetComponent<TextMeshProUGUI>();
                 spentText = GameObject.Find("SpentText").GetComponent<TextMeshProUGUI>();
                 earnedText = GameObject.Find("EarnedText").GetComponent<TextMeshProUGUI>();
+                pityText = GameObject.Find("PityText").GetComponent<TextMeshProUGUI>();
                 oddsPanel.SetActive(false);
             }
             CardInstantiator = GameObject.Find("PackManager").GetComponent<CardInstantiator>();
@@ -159,6 +162,7 @@ public class CardPackWeight : MonoBehaviour
                 break;
         }
 
+        AdjustPityValues(legendaryPity);
         CardInstantiator.legendaryOdds = originalLegendaryOdds;
         CardInstantiator.epicOdds = originalEpicOdds;
         CardInstantiator.rareOdds = originalRareOdds;
@@ -166,6 +170,35 @@ public class CardPackWeight : MonoBehaviour
 
         CardPackGrab.canTear = true;
         arrow.SetActive(true);
+    }
+
+    public void AdjustPityValues(int legendaryPity)
+    {
+        originalLegendaryOdds += legendaryPity;
+
+        int split = legendaryPity / 3;
+        int remainder = legendaryPity % 3;
+
+        originalCommonOdds -= split;
+        originalRareOdds -= split;
+        originalEpicOdds -= split;
+
+        if (remainder > 0)
+        {
+            originalCommonOdds -= 1;
+            remainder--;
+        }
+        if (remainder > 0)
+        {
+            originalRareOdds -= 1;
+            remainder--;
+        }
+        if (remainder > 0)
+        {
+            originalEpicOdds -= 1;
+        }
+
+        pityText.text = "Pity: " + legendaryPity + "%";
     }
 
     public void AddMoney(float money)
@@ -182,7 +215,7 @@ public class CardPackWeight : MonoBehaviour
         playerEarned += money;
     }
 
-    public void UpdateOdds(int packType)
+    public void UpdateOdds(int packType) // constantly update oddsPanel rates
     {
         if (oddsPanel.activeSelf == true)
         {
@@ -225,6 +258,7 @@ public class CardPackWeight : MonoBehaviour
                 break;
         }
 
+        AdjustPityValues(legendaryPity);
         CardInstantiator.legendaryOdds = originalLegendaryOdds;
         CardInstantiator.epicOdds = originalEpicOdds;
         CardInstantiator.rareOdds = originalRareOdds;
@@ -244,12 +278,15 @@ public class CardPackWeight : MonoBehaviour
             walletText = GameObject.Find("WalletText").GetComponent<TextMeshProUGUI>();
             spentText = GameObject.Find("SpentText").GetComponent<TextMeshProUGUI>();
             earnedText = GameObject.Find("EarnedText").GetComponent<TextMeshProUGUI>();
+            pityText = GameObject.Find("PityText").GetComponent<TextMeshProUGUI>();
         }
 
 
         walletText.text = "Wallet: $" + playerWallet.ToString();
         spentText.text = "Spent: $" + playerSpent.ToString();
         earnedText.text = "Earned: $" + playerEarned.ToString();
+
+        pityText.text = "Pity: " + legendaryPity + "%";
 
         packName.text = packTypeName;
         legendaryText.text = originalLegendaryOdds.ToString()+"%";

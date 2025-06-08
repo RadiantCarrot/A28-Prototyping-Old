@@ -26,6 +26,7 @@ public class CardInstantiator : MonoBehaviour
 
     public CardPackWeight CardPackWeight;
     public float cardValue;
+    public bool legendarySpawned = false;
 
 
     // Start is called before the first frame update
@@ -62,6 +63,8 @@ public class CardInstantiator : MonoBehaviour
             card.GetComponent<MoveCard>().cardNumber = i;
             cards.Add(card);
         }
+
+        CheckLegendary();
     }
 
     public void RandomiseCards()
@@ -72,6 +75,7 @@ public class CardInstantiator : MonoBehaviour
         {
             cardToInstantiate = legendaryCard;
             cardValue = CardPackWeight.legendaryValue;
+            legendarySpawned = true;
         }
         else if (percentage > legendaryOdds && percentage <= legendaryOdds + epicOdds)
         {
@@ -87,6 +91,36 @@ public class CardInstantiator : MonoBehaviour
         {
             cardToInstantiate = commonCard;
             cardValue = CardPackWeight.commonValue;
+        }
+    }
+
+    public void CheckLegendary()
+    {
+        if (legendarySpawned == true)
+        {
+            CardPackWeight.legendaryPity = 0;
+            legendarySpawned = false;
+        }
+        else
+        {
+            int packType = cardPack.GetComponent<CardPackSelect>().packType;
+
+            if (packType == 1) //vlight
+            {
+                CardPackWeight.legendaryPity += 4;
+            }
+            if (packType == 2) //light
+            {
+                CardPackWeight.legendaryPity += 3;
+            }
+            if (packType == 3) //heavy
+            {
+                CardPackWeight.legendaryPity += 2;
+            }
+            if (packType == 4) //vheavy
+            {
+                CardPackWeight.legendaryPity += 1;
+            }
         }
     }
 }
