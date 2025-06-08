@@ -19,10 +19,10 @@ public class CardInstantiator : MonoBehaviour
 
     public CardPackGrab CardPackGrab;
 
-    public int legendaryOdds;
-    public int epicOdds;
-    public int rareOdds;
-    public int commonOdds;
+    public float legendaryOdds;
+    public float epicOdds;
+    public float rareOdds;
+    public float commonOdds;
 
     public CardPackWeight CardPackWeight;
     public float cardValue;
@@ -107,19 +107,19 @@ public class CardInstantiator : MonoBehaviour
 
             if (packType == 1) //vlight
             {
-                CardPackWeight.legendaryPity += 4;
+                CardPackWeight.legendaryPity += 2f;
             }
             if (packType == 2) //light
             {
-                CardPackWeight.legendaryPity += 3;
+                CardPackWeight.legendaryPity += 1.5f;
             }
             if (packType == 3) //heavy
             {
-                CardPackWeight.legendaryPity += 2;
+                CardPackWeight.legendaryPity += 1f;
             }
             if (packType == 4) //vheavy
             {
-                CardPackWeight.legendaryPity += 1;
+                CardPackWeight.legendaryPity += 0.5f;
             }
         }
     }

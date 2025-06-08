@@ -9,13 +9,13 @@ public class CardPackWeight : MonoBehaviour
     public CardPackGrab CardPackGrab;
     public GameObject arrow;
 
-    public int originalLegendaryOdds;
+    public float originalLegendaryOdds;
     public TMP_Text legendaryText;
-    public int originalEpicOdds;
+    public float originalEpicOdds;
     public TMP_Text epicText;
-    public int originalRareOdds;
+    public float originalRareOdds;
     public TMP_Text rareText;
-    public int originalCommonOdds;
+    public float originalCommonOdds;
     public TMP_Text commonText;
 
     public float legendaryValue;
@@ -41,7 +41,7 @@ public class CardPackWeight : MonoBehaviour
     public bool reassignVariables = true;
     public GameObject Button;
 
-    public int legendaryPity = 0;
+    public float legendaryPity = 0;
     public TMP_Text pityText;
 
 
@@ -58,10 +58,10 @@ public class CardPackWeight : MonoBehaviour
         originalRareOdds = 15;
         originalCommonOdds = 80;
 
-        legendaryValue = 8f; // EV $0.05
-        epicValue = 4f; // EV $0.24
-        rareValue = 1.75f; // EV $0.30
-        commonValue = 0.25f; // EV $0.36
+        legendaryValue = 7f;
+        epicValue = 3f;
+        rareValue = 1f;
+        commonValue = 0f;
 
         playerWallet = 50;
 
@@ -172,33 +172,34 @@ public class CardPackWeight : MonoBehaviour
         arrow.SetActive(true);
     }
 
-    public void AdjustPityValues(int legendaryPity)
+    public void AdjustPityValues(float legendaryPity)
     {
         originalLegendaryOdds += legendaryPity;
 
-        int split = legendaryPity / 3;
-        int remainder = legendaryPity % 3;
+        float split = legendaryPity / 3;
+        float remainder = legendaryPity % 3;
 
         originalCommonOdds -= split;
         originalRareOdds -= split;
         originalEpicOdds -= split;
+        int intRemainder = Mathf.FloorToInt(remainder);
 
-        if (remainder > 0)
+        if (intRemainder > 0)
         {
             originalCommonOdds -= 1;
-            remainder--;
+            intRemainder--;
         }
-        if (remainder > 0)
+        if (intRemainder > 0)
         {
             originalRareOdds -= 1;
-            remainder--;
+            intRemainder--;
         }
-        if (remainder > 0)
+        if (intRemainder > 0)
         {
             originalEpicOdds -= 1;
         }
 
-        pityText.text = "Pity: " + legendaryPity + "%";
+        pityText.text = "Pity: " + legendaryPity.ToString("F1") + "%";
     }
 
     public void AddMoney(float money)
@@ -284,15 +285,19 @@ public class CardPackWeight : MonoBehaviour
 
         walletText.text = "Wallet: $" + playerWallet.ToString();
         spentText.text = "Spent: $" + playerSpent.ToString();
-        earnedText.text = "Earned: $" + playerEarned.ToString();
+        earnedText.text = "Earned: $" + playerEarned.ToString("F2");
 
         pityText.text = "Pity: " + legendaryPity + "%";
 
         packName.text = packTypeName;
-        legendaryText.text = originalLegendaryOdds.ToString()+"%";
-        epicText.text = originalEpicOdds.ToString() + "%";
-        rareText.text = originalRareOdds.ToString() + "%";
-        commonText.text = originalCommonOdds.ToString() + "%";
+        legendaryText.text = originalLegendaryOdds.ToString("F1") +"%";
+        if (legendaryPity > 0)
+        {
+            legendaryText.color = Color.blue;
+        }
+        epicText.text = originalEpicOdds.ToString("F1") + "%";
+        rareText.text = originalRareOdds.ToString("F1") + "%";
+        commonText.text = originalCommonOdds.ToString("F1") + "%";
     }
 
     public void ToggleOddsPanel()

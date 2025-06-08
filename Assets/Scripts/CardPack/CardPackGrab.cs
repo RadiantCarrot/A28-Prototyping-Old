@@ -1,9 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CardPackGrab : MonoBehaviour
 {
+    // this script is on realtop > anchor gameobject
+
     public Vector3 mousePosition;
     public Vector3 startPosition;
     public float moveSpeed = 0.5f;
@@ -22,6 +24,8 @@ public class CardPackGrab : MonoBehaviour
 
     public CardExplode CardExplode;
     public bool delayPack = false;
+
+    public TMP_Text statusText;
 
 
     // Start is called before the first frame update
@@ -56,6 +60,7 @@ public class CardPackGrab : MonoBehaviour
                 {
                     // yoink pack rip far away
                     gameObject.transform.position = Vector2.Lerp(transform.position, flyTarget.transform.position, moveSpeed / 2);
+                    statusText.text = "";
                     if (delayPack == true)
                     {
                         // fast rip

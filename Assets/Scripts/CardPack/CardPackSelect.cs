@@ -112,7 +112,14 @@ public class CardPackSelect : MonoBehaviour
                 CardPackGrab.canTear = true;
                 CardPackGrab.cardPack = gameObject;
 
-                CardPackWeight.SubtractMoney(CardPackWeight.packCost);
+                if (upgradePack != true)
+                {
+                    CardPackWeight.SubtractMoney(CardPackWeight.packCost);
+                }
+                else
+                {
+                    CardPackWeight.SubtractMoney(CardPackWeight.packCost - 5);
+                }
 
                 canClick = false;
             }
