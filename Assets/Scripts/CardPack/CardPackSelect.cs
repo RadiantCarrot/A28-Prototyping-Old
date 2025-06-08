@@ -33,6 +33,7 @@ public class CardPackSelect : MonoBehaviour
     public int upgradeThreshold = 5;
     public bool upgradePack = false;
     public TMP_Text statusText;
+    public GameObject upgradeParticles;
 
 
     // Start is called before the first frame update
@@ -97,6 +98,8 @@ public class CardPackSelect : MonoBehaviour
                 {
                     CardPackWeight.ConfirmWeight(packType + 1);
                     CardPackController.DestroyOtherPacks(true, packType + 1);
+                    FindObjectOfType<CameraShake>().TriggerShake(0.2f, 0.1f);
+                    Instantiate(upgradeParticles);
                 }
                 else
                 {

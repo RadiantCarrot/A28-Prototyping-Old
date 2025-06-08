@@ -192,6 +192,10 @@ MonoBehaviour:
   packType: 0
   scalePacks: 0
   scaleDuration: 0.1
+  upgradeThreshold: 5
+  upgradePack: 0
+  statusText: {fileID: 0}
+  upgradeParticles: {fileID: 7086677734285990430, guid: ff2e45f97cc83444ea3410e65742414d, type: 3}
 --- !u!1 &3081565589889733560
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +441,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33686
+  m_InstanceId: -63558
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -667,7 +671,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33718
+  m_InstanceId: -63574
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -782,7 +786,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33744
+  m_InstanceId: -63566
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -1218,7 +1222,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33794
+  m_InstanceId: -63544
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

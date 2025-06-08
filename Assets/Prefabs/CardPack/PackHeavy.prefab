@@ -214,7 +214,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33386
+  m_InstanceId: -61150
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_ApplyToSortingLayers: 0000000081a2b920
+  m_ApplyToSortingLayers: 81a2b92000000000
   m_ShapePath:
   - {x: -0.5, y: -0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
@@ -329,7 +329,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33372
+  m_InstanceId: -61136
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -525,6 +525,10 @@ MonoBehaviour:
   packType: 0
   scalePacks: 0
   scaleDuration: 0.1
+  upgradeThreshold: 5
+  upgradePack: 0
+  statusText: {fileID: 0}
+  upgradeParticles: {fileID: 7086677734285990430, guid: ff2e45f97cc83444ea3410e65742414d, type: 3}
 --- !u!1 &3715663572367591967
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +755,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33314
+  m_InstanceId: -61166
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -1002,7 +1006,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33310
+  m_InstanceId: -61158
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

@@ -26,6 +26,8 @@ public class CardPackGrab : MonoBehaviour
     public bool delayPack = false;
 
     public TMP_Text statusText;
+    public GameObject tearParticles;
+    public bool canScreenshake = true;
 
 
     // Start is called before the first frame update
@@ -61,6 +63,13 @@ public class CardPackGrab : MonoBehaviour
                     // yoink pack rip far away
                     gameObject.transform.position = Vector2.Lerp(transform.position, flyTarget.transform.position, moveSpeed / 2);
                     statusText.text = "";
+                    if (canScreenshake == true)
+                    {
+                        FindObjectOfType<CameraShake>().TriggerShake(0.2f, 0.1f);
+                        Instantiate(tearParticles);
+                        canScreenshake = false;
+                    }
+
                     if (delayPack == true)
                     {
                         // fast rip
