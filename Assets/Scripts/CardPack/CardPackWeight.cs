@@ -58,10 +58,10 @@ public class CardPackWeight : MonoBehaviour
         originalRareOdds = 15;
         originalCommonOdds = 80;
 
-        legendaryValue = 7f;
+        legendaryValue = 6f;
         epicValue = 3f;
         rareValue = 1f;
-        commonValue = 0f;
+        commonValue = 0.1f;
 
         playerWallet = 50;
 

@@ -64,6 +64,11 @@ public class DontDestroyOnLoad : MonoBehaviour
             RestartScene();
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         if (cardsClicked >= 10)
         {
             RevealContinueButton();
