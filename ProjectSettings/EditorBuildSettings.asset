@@ -27,12 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Old Scenes/Pyramid.unity
     guid: f9bedb0be07632840a24e0819112ec51
   - enabled: 0
-    path: Assets/Scenes/Ballpit.unity
+    path: Assets/Scenes/Old Scenes/Ballpit.unity
     guid: 8033da331ba64274387932dca6d401e4
   - enabled: 1
     path: Assets/Scenes/Card Pack.unity
     guid: c9a04c9190c3bb14ab6175dd50b6fb4b
   - enabled: 0
-    path: Assets/Scenes/Ludo.unity
+    path: Assets/Scenes/Old Scenes/Ludo.unity
     guid: 47b968208ca5cb64aa1cfa32874acc61
   m_configObjects: {}
