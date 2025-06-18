@@ -27,7 +27,6 @@ public class BalloonExplode : MonoBehaviour
     {
         if (currentExplodeThreshold != newExplodeThreshold)
         {
-            //currentExplodeThreshold = Mathf.Lerp(currentExplodeThreshold, newExplodeThreshold, 1f);
             currentExplodeThreshold += 0.1f;
             if (currentExplodeThreshold >= newExplodeThreshold)
             {
@@ -52,6 +51,7 @@ public class BalloonExplode : MonoBehaviour
             balloonCashout.ToggleBuyBalloonButton();
             Instantiate(ExplodeParticles, transform.position, Quaternion.identity);
             currentExplodeThreshold = 0;
+            FindObjectOfType<CameraShake>().TriggerShake(0.2f, 0.1f);
             Destroy(gameObject);
         }
     }

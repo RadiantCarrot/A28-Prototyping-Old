@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class BalloonValue : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class BalloonValue : MonoBehaviour
     public float currentValue = 0;
     public float newValue;
 
+    public GameObject CashOutButton;
+
 
     // Start is called before the first frame update
     void Start()
     {
         currentValue = 0;
         newValue = currentValue;
+
+        CashOutButton = GameObject.Find("CashOutButton");
     }
 
     // Update is called once per frame
@@ -29,6 +34,15 @@ public class BalloonValue : MonoBehaviour
                 currentValue = newValue;
             }
             valueText.text = "$" + currentValue.ToString("F2");
+        }
+
+        if (currentValue == 0)
+        {
+            CashOutButton.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            CashOutButton.GetComponent<Button>().interactable = true;
         }
     }
 

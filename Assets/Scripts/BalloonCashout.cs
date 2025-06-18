@@ -19,7 +19,7 @@ public class BalloonCashout : MonoBehaviour
     void Start()
     {
         pumpAir = GameObject.Find("Pump").GetComponent<PumpAir>();
-        walletValue = 1000;
+        walletValue = 100;
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class BalloonCashout : MonoBehaviour
             AddWalletValue();
         }
 
-        walletText.text = "$" + walletValue.ToString("F2");
+        walletText.text = "Wallet: $" + walletValue.ToString("F2");
     }
 
     public void AddWalletValue() // cashout
