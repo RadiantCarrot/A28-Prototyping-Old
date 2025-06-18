@@ -6,6 +6,7 @@ using UnityEngine;
 public class BalloonCashout : MonoBehaviour
 {
     public TMP_Text walletText;
+    public TMP_Text walletSmallText;
     public float walletValue = 0;
     public GameObject OldBalloon;
     public float balloonValue;
@@ -43,6 +44,10 @@ public class BalloonCashout : MonoBehaviour
         //StartCoroutine (InstantiateBalloon(1f));
 
         walletValue += balloonValue;
+        walletSmallText.text = "+ $" + balloonValue.ToString("F2");
+        walletSmallText.color = Color.green;
+        walletSmallText.gameObject.SetActive(true);
+        StartCoroutine(HideText(walletSmallText));
     }
 
     public void SubtractWalletValue() // buy new balloon
@@ -50,6 +55,11 @@ public class BalloonCashout : MonoBehaviour
         if (walletValue > 10)
         {
             walletValue -= 10;
+            walletSmallText.text = "- $10";
+            walletSmallText.color = Color.red;
+            walletSmallText.gameObject.SetActive(true);
+            StartCoroutine(HideText(walletSmallText));
+
             ToggleBuyBalloonButton();
             StartCoroutine(InstantiateBalloon(0f));
         }
@@ -72,5 +82,12 @@ public class BalloonCashout : MonoBehaviour
         {
             BuyBalloonButton.SetActive(true);
         }
+    }
+
+    public IEnumerator HideText(TMP_Text textToHide)
+    {
+        textToHide.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        textToHide.gameObject.SetActive(false);
     }
 }

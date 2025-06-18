@@ -10,7 +10,7 @@ public class SeedScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GenerateSeed();
+        GenerateSeed();
         // seed generation called by dontdestroyonload script
     }
 
