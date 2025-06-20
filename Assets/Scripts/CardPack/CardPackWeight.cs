@@ -62,15 +62,15 @@ public class CardPackWeight : MonoBehaviour
         arrow = GameObject.Find("Arrow");
         Button = GameObject.Find("PackButton");
 
-        originalLegendaryOdds = 1;
-        originalEpicOdds = 4;
-        originalRareOdds = 15;
-        originalCommonOdds = 80;
+        //originalLegendaryOdds = 1;
+        //originalEpicOdds = 4;
+        //originalRareOdds = 15;
+        //originalCommonOdds = 80;
 
-        legendaryValue = 6f;
-        epicValue = 3f;
-        rareValue = 1f;
-        commonValue = 0.1f;
+        //legendaryValue = 6f;
+        //epicValue = 3f;
+        //rareValue = 1f;
+        //commonValue = 0.1f;
 
         playerWallet = 50;
 

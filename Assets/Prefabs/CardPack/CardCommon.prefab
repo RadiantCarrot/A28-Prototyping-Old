@@ -446,3 +446,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardPackWeight: {fileID: 0}
   valueText: {fileID: 9012847652606055555}
+  displayValue: 0
