@@ -3856,6 +3856,10 @@ MonoBehaviour:
   CardPackWeight: {fileID: 0}
   cardValue: 0
   legendarySpawned: 0
+  vlightPity: 2
+  lightPity: 1.5
+  heavyPity: 1
+  vheavyPity: 0.5
 --- !u!114 &1329139474
 MonoBehaviour:
   m_ObjectHideFlags: 0

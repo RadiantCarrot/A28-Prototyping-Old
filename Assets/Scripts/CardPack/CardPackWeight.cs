@@ -236,7 +236,7 @@ public class CardPackWeight : MonoBehaviour
         switch (packType)
         {
             case 1: // vlight
-                packTypeName = "Okay Pack";
+                packTypeName = "Very Light Pack";
                 originalLegendaryOdds = 1;
                 originalEpicOdds = 4;
                 originalRareOdds = 15;
@@ -244,7 +244,7 @@ public class CardPackWeight : MonoBehaviour
                 packCost = 5;
                 break;
             case 2: // light
-                packTypeName = "Good Pack";
+                packTypeName = "Light Pack";
                 originalLegendaryOdds = 2;
                 originalEpicOdds = 8;
                 originalRareOdds = 14;
@@ -252,7 +252,7 @@ public class CardPackWeight : MonoBehaviour
                 packCost = 10;
                 break;
             case 3: // heavy
-                packTypeName = "Gooder Pack";
+                packTypeName = "Heavy Pack";
                 originalLegendaryOdds = 3;
                 originalEpicOdds = 12;
                 originalRareOdds = 14;
@@ -260,7 +260,7 @@ public class CardPackWeight : MonoBehaviour
                 packCost = 15;
                 break;
             case 4: // vheavy
-                packTypeName = "Bestest Pack";
+                packTypeName = "Very Heavy Pack";
                 originalLegendaryOdds = 4;
                 originalEpicOdds = 16;
                 originalRareOdds = 13;

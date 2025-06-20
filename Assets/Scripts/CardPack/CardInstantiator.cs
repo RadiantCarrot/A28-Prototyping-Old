@@ -28,6 +28,10 @@ public class CardInstantiator : MonoBehaviour
     public CardPackWeight CardPackWeight;
     public float cardValue;
     public bool legendarySpawned = false;
+    public float vlightPity;
+    public float lightPity;
+    public float heavyPity;
+    public float vheavyPity;
 
 
     // Start is called before the first frame update
@@ -113,19 +117,19 @@ public class CardInstantiator : MonoBehaviour
 
             if (packType == 1) //vlight
             {
-                CardPackWeight.legendaryPity += 2f;
+                CardPackWeight.legendaryPity += vlightPity;
             }
             if (packType == 2) //light
             {
-                CardPackWeight.legendaryPity += 1.5f;
+                CardPackWeight.legendaryPity += lightPity;
             }
             if (packType == 3) //heavy
             {
-                CardPackWeight.legendaryPity += 1f;
+                CardPackWeight.legendaryPity += heavyPity;
             }
             if (packType == 4) //vheavy
             {
-                CardPackWeight.legendaryPity += 0.5f;
+                CardPackWeight.legendaryPity += vheavyPity;
             }
         }
     }
