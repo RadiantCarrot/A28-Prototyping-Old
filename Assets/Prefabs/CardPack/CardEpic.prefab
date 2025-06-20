@@ -246,13 +246,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4777718024761195943}
   - component: {fileID: 4887384574132707478}
-  - component: {fileID: 103525741886634898}
-  - component: {fileID: 4923132307664499317}
   - component: {fileID: 8836351233054340115}
   - component: {fileID: -959264717716573723}
+  - component: {fileID: 4923132307664499317}
+  - component: {fileID: 3703621660680720636}
   m_Layer: 0
   m_Name: CardEpic
-  m_TagString: Untagged
+  m_TagString: CardEpic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,71 +325,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &103525741886634898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447066723313023060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_ComponentVersion: 1
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 00000000
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  m_ShapePathHash: 0
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -20106
-  m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.5, y: 0.5, z: 0}
---- !u!114 &4923132307664499317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447066723313023060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30be4bac9fef694094199b663d25b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boardPosition0: {fileID: 0}
-  boardPosition1: {fileID: 0}
-  boardPosition2: {fileID: 0}
-  boardPosition3: {fileID: 0}
-  boardPosition4: {fileID: 0}
-  boardPosition5: {fileID: 0}
-  boardPosition6: {fileID: 0}
-  boardPosition7: {fileID: 0}
-  boardPosition8: {fileID: 0}
-  boardPosition9: {fileID: 0}
-  moveSpeed: 10
-  boardPosition: {x: 0, y: 0, z: 0}
-  shiftPositionLeft: {x: 0, y: 0, z: 0}
-  shiftPositionRight: {x: 0, y: 0, z: 0}
-  CardInstantiator: {fileID: 0}
-  Anchor: {fileID: 0}
-  CardPackGrab: {fileID: 0}
-  CardExplode: {fileID: 0}
-  DontDestroyOnLoad: {fileID: 0}
-  cardNumber: 0
-  cardClicked: 0
-  originalPosition: {x: 0, y: 0, z: 0}
-  canHideCards: 1
 --- !u!61 &8836351233054340115
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -462,3 +397,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4923132307664499317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8447066723313023060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30be4bac9fef694094199b663d25b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardPosition0: {fileID: 0}
+  boardPosition1: {fileID: 0}
+  boardPosition2: {fileID: 0}
+  boardPosition3: {fileID: 0}
+  boardPosition4: {fileID: 0}
+  boardPosition5: {fileID: 0}
+  boardPosition6: {fileID: 0}
+  boardPosition7: {fileID: 0}
+  boardPosition8: {fileID: 0}
+  boardPosition9: {fileID: 0}
+  moveSpeed: 10
+  boardPosition: {x: 0, y: 0, z: 0}
+  shiftPositionLeft: {x: 0, y: 0, z: 0}
+  shiftPositionRight: {x: 0, y: 0, z: 0}
+  CardInstantiator: {fileID: 0}
+  Anchor: {fileID: 0}
+  CardPackGrab: {fileID: 0}
+  CardExplode: {fileID: 0}
+  DontDestroyOnLoad: {fileID: 0}
+  cardNumber: 0
+  cardClicked: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  canHideCards: 1
+--- !u!114 &3703621660680720636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8447066723313023060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caed49d1e26a6841ae7e20c40246e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardPackWeight: {fileID: 0}
+  valueText: {fileID: 47998552675863790}

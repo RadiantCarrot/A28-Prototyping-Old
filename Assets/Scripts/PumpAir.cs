@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PumpAir : MonoBehaviour
 {
@@ -9,7 +12,9 @@ public class PumpAir : MonoBehaviour
     public float pumpValueMult;
     public BalloonScale balloonScale;
     public BalloonExplode balloonExplode;
+
     public BalloonValue balloonValue;
+    public TMP_Text potentialValueText;
 
     public float pumpCooldown;
 
@@ -26,6 +31,11 @@ public class PumpAir : MonoBehaviour
     void Update()
     {
         pumpCooldown -= Time.deltaTime;
+        if (balloonValue != null)
+        {
+            float potentialValue = pumpValueBase + 0.25f + pumpCount * pumpValueMult;
+            potentialValueText.text = "(+$" + potentialValue.ToString("F2") + ")";
+        }
     }
 
     public void OnMouseDown()

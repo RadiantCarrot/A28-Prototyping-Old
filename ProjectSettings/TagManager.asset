@@ -4,28 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - DiceFace
-  - BucketBig
-  - BucketMedium
-  - BucketSmall
-  - PinSticky
-  - PinLefty
-  - PinRighty
-  - Puck
-  - ZoneBig
-  - ZoneSmall
-  - FoodBig
-  - FoodMedium
-  - FoodSmall
-  - FoodSpawner
-  - Plate
-  - PlateTrigger
-  - PlateCounter
-  - Question1MarkBox
-  - Question2MarkBox
-  - Question3MarkBox
-  - Tile
   - CardPack
+  - CardCommon
+  - CardRare
+  - CardEpic
+  - CardLegendary
   layers:
   - Default
   - TransparentFX

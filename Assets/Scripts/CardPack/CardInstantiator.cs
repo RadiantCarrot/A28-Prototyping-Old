@@ -13,6 +13,7 @@ public class CardInstantiator : MonoBehaviour
     public GameObject epicCard;
     public GameObject legendaryCard;
     public GameObject cardToInstantiate;
+    public int cardRarity;
 
     public int cardNumber = 0;
     public bool canReveal = false;
@@ -61,6 +62,7 @@ public class CardInstantiator : MonoBehaviour
             card.name = "Card " + i.ToString();
             card.GetComponent<SpriteRenderer>().sortingOrder = i;
             card.GetComponent<MoveCard>().cardNumber = i;
+            //card.GetComponent<CardValueDisplay>().SetCardValue(cardRarity);
             cards.Add(card);
         }
 
@@ -75,22 +77,26 @@ public class CardInstantiator : MonoBehaviour
         {
             cardToInstantiate = legendaryCard;
             cardValue = CardPackWeight.legendaryValue;
+            cardRarity = 1;
             legendarySpawned = true;
         }
         else if (percentage > legendaryOdds && percentage <= legendaryOdds + epicOdds)
         {
             cardToInstantiate = epicCard;
             cardValue = CardPackWeight.epicValue;
+            cardRarity = 2;
         }
         else if (percentage > legendaryOdds + epicOdds && percentage <= legendaryOdds + epicOdds + rareOdds)
         {
             cardToInstantiate = rareCard;
             cardValue = CardPackWeight.rareValue;
+            cardRarity = 3;
         }
         else
         {
             cardToInstantiate = commonCard;
             cardValue = CardPackWeight.commonValue;
+            cardRarity = 4;
         }
     }
 

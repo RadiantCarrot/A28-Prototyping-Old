@@ -35,6 +35,9 @@ public class CardPackSelect : MonoBehaviour
     public TMP_Text statusText;
     public GameObject upgradeParticles;
 
+    public TMP_Text packName;
+    public TMP_Text packCost;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,8 @@ public class CardPackSelect : MonoBehaviour
         tinyScale = bigScale * 0.4f;
 
         scalePacks = true;
+
+        DisplayPackDetails(packType);
     }
 
     // Update is called once per frame
@@ -250,5 +255,29 @@ public class CardPackSelect : MonoBehaviour
 
         transform.localScale = targetScale; // Snap to final scale
         //scalePacks = true;
+    }
+
+    public void DisplayPackDetails(int packType)
+    {
+        if (packType == 1)
+        {
+            packName.text = "Very Light Pack";
+            packCost.text = "$"+CardPackWeight.vlightPackCost.ToString();
+        }
+        if (packType == 2)
+        {
+            packName.text = "Light Pack";
+            packCost.text = "$" + CardPackWeight.lightPackCost.ToString();
+        }
+        if (packType == 3)
+        {
+            packName.text = "Heavy Pack";
+            packCost.text = "$" + CardPackWeight.heavyPackCost.ToString();
+        }
+        if (packType == 4)
+        {
+            packName.text = "Very Heavy Pack";
+            packCost.text = "$" + CardPackWeight.vheavyPackCost.ToString();
+        }
     }
 }

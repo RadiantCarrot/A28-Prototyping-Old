@@ -28,7 +28,16 @@ public class CardPackWeight : MonoBehaviour
     public int packType;
     public string packTypeName;
     public TMP_Text packName;
+    public string vlightPackName;
+    public string lightPackName;
+    public string heavyPackName;
+    public string vheavyPackName;
+
     public int packCost;
+    public int vlightPackCost = 5;
+    public int lightPackCost = 10;
+    public int heavyPackCost = 15;
+    public int vheavyPackCost = 20;
 
     public float playerWallet;
     public TMP_Text walletText;
@@ -129,36 +138,37 @@ public class CardPackWeight : MonoBehaviour
         switch (packType)
         {
             case 1: // vlight
-                packTypeName = "Okay Pack";
+                packTypeName = vlightPackName;
                 originalLegendaryOdds = 1;
                 originalEpicOdds = 4;
                 originalRareOdds = 15;
                 originalCommonOdds = 80;
-                packCost = 5;
+                packCost = vlightPackCost;
+;
                 break;
             case 2: // light
-                packTypeName = "Good Pack";
+                packTypeName = lightPackName;
                 originalLegendaryOdds = 2;
                 originalEpicOdds = 8;
                 originalRareOdds = 14;
                 originalCommonOdds = 76;
-                packCost = 10;
+                packCost = lightPackCost;
                 break;
             case 3: // heavy
-                packTypeName = "Gooder Pack";
+                packTypeName = heavyPackName;
                 originalLegendaryOdds = 3;
                 originalEpicOdds = 12;
                 originalRareOdds = 14;
                 originalCommonOdds = 71;
-                packCost = 15;
+                packCost = heavyPackCost;
                 break;
             case 4: // vheavy
-                packTypeName = "Bestest Pack";
+                packTypeName = vheavyPackName;
                 originalLegendaryOdds = 4;
                 originalEpicOdds = 16;
                 originalRareOdds = 13;
                 originalCommonOdds = 67;
-                packCost = 20;
+                packCost = vheavyPackCost;
                 break;
         }
 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BalloonValue : MonoBehaviour
 {
     public TMP_Text valueText;
+    public TMP_Text potentialValueText;
     public float currentValue = 0;
     public float newValue;
 
@@ -50,5 +51,8 @@ public class BalloonValue : MonoBehaviour
     {
         newValue += value;
     }
-
+    public void DisplayPotentialValue(float value)
+    {
+        potentialValueText.text = "(+$" + value.ToString("F2") + ")";
+    }
 }

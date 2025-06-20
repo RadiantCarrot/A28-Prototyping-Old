@@ -542,8 +542,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 2533698002130496254}
+  potentialValueText: {fileID: 0}
   currentValue: 0
   newValue: 0
+  CashOutButton: {fileID: 0}
 --- !u!1 &8612219729610098610
 GameObject:
   m_ObjectHideFlags: 0

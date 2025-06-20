@@ -46,6 +46,8 @@ public class CardPackController : MonoBehaviour
         cardPacks.Clear();
         packsToDestroy.Clear();
         InstantiatePacks();
+
+        CycleRight(); //update carousel because for some reason scale isnt correct on start
     }
 
     // Update is called once per frame
