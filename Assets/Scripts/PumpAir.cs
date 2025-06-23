@@ -10,6 +10,7 @@ public class PumpAir : MonoBehaviour
     private int pumpCount = 0;
     public float pumpValueBase;
     public float pumpValueMult;
+    public BalloonProbability balloonProbability;
     public BalloonScale balloonScale;
     public BalloonExplode balloonExplode;
 
@@ -25,6 +26,7 @@ public class PumpAir : MonoBehaviour
     void Start()
     {
         pumpAnimator = GetComponent<Animator>();
+        pumpValueMult = 0.25f;
     }
 
     // Update is called once per frame
@@ -36,14 +38,23 @@ public class PumpAir : MonoBehaviour
             float potentialValue = pumpValueBase + 0.25f + pumpCount * pumpValueMult;
             potentialValueText.text = "(+$" + potentialValue.ToString("F2") + ")";
         }
+
+        if (balloonProbability.isFixed == true)
+        {
+            pumpValueMult = 0.25f;
+        }
+        else
+        {
+            pumpValueMult = 0.4f;
+        }
     }
 
     public void OnMouseDown()
     {
-        if (balloonScale != null)
+        if (balloonScale != null && pumpCooldown <= 0)
         {
             pumpCount++;
-            pumpCooldown = 0.5f;
+            pumpCooldown = 0.75f;
             balloonValue.AddBalloonValue(pumpValueBase + pumpCount * pumpValueMult);
             pumpAnimator.Play("PumpDown");
             balloonScale.AddAir();

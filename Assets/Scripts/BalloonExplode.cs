@@ -9,6 +9,8 @@ public class BalloonExplode : MonoBehaviour
     public int explodeChance = 0;
     public float currentExplodeThreshold = 0;
     public float newExplodeThreshold = 0;
+    public float explodeMultiplier;
+    public BalloonProbability balloonProbability;
     public Slider thresholdSlider;
     public GameObject ExplodeParticles;
 
@@ -20,6 +22,8 @@ public class BalloonExplode : MonoBehaviour
     {
         balloonCashout = GameObject.Find("BalloonController").GetComponent<BalloonCashout>();
         thresholdSlider = GameObject.Find("Backing").GetComponent<Slider>();
+        balloonProbability = GameObject.Find("BalloonController").GetComponent<BalloonProbability>();
+        explodeMultiplier = 1.5f;
     }
 
     // Update is called once per frame
@@ -35,18 +39,27 @@ public class BalloonExplode : MonoBehaviour
         }
 
         thresholdSlider.value = currentExplodeThreshold * -1;
+
+        if (balloonProbability.isFixed == true)
+        {
+            explodeMultiplier = 1.5f;
+        }
+        else
+        {
+            explodeMultiplier = 1.25f;
+        }
     }
 
-    public void RaiseThreshold(int risk)
+    public void RaiseThreshold(int pumpCount)
     {
-        newExplodeThreshold = currentExplodeThreshold += risk * 1.5f;
+        newExplodeThreshold = currentExplodeThreshold += pumpCount * explodeMultiplier;
     }
     
     public void CheckExplode()
     {
         explodeChance = Random.Range(1, 101);
 
-        if (explodeChance < currentExplodeThreshold - 0)
+        if (explodeChance < currentExplodeThreshold)
         {
             balloonCashout.ToggleBuyBalloonButton();
             Instantiate(ExplodeParticles, transform.position, Quaternion.identity);

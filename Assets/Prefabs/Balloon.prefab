@@ -526,6 +526,7 @@ MonoBehaviour:
   explodeChance: 0
   currentExplodeThreshold: 0
   newExplodeThreshold: 0
+  explodeMultiplier: 0
   thresholdSlider: {fileID: 0}
   ExplodeParticles: {fileID: 278362726699716679, guid: 2f33e4bfcf288e04996623a68b1f4322, type: 3}
   balloonCashout: {fileID: 0}

@@ -26,7 +26,7 @@ public class BalloonScale : MonoBehaviour
     {
         if (isScaling)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime * 2;
             float time = elapsedTime / lerpDuration;
 
             transform.localScale = Vector3.Lerp(initialScale, targetScale, time);
