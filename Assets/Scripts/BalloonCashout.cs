@@ -10,16 +10,18 @@ public class BalloonCashout : MonoBehaviour
     public float walletValue = 0;
     public GameObject OldBalloon;
     public float balloonValue;
+    public float balloonCost;
 
     public GameObject NewBalloon;
     public GameObject BuyBalloonButton;
     public PumpAir pumpAir;
 
+    public BalloonProbability balloonProbability;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        pumpAir = GameObject.Find("Pump").GetComponent<PumpAir>();
         walletValue = 100;
     }
 
@@ -52,9 +54,9 @@ public class BalloonCashout : MonoBehaviour
 
     public void SubtractWalletValue() // buy new balloon
     {
-        if (walletValue > 10)
+        if (walletValue > balloonCost)
         {
-            walletValue -= 10;
+            walletValue -= balloonCost;
             walletSmallText.text = "- $10";
             walletSmallText.color = Color.red;
             walletSmallText.gameObject.SetActive(true);
@@ -62,6 +64,7 @@ public class BalloonCashout : MonoBehaviour
 
             ToggleBuyBalloonButton();
             StartCoroutine(InstantiateBalloon(0f));
+            //balloonProbability.balloonExplode = GameObject.Find("Balloon(Clone)").GetComponent<BalloonExplode>();
         }
     }
 
@@ -69,7 +72,9 @@ public class BalloonCashout : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnDelay);
         Instantiate(NewBalloon, gameObject.transform.position, Quaternion.identity);
+
         pumpAir.ReferenceNewBalloon();
+        balloonProbability.ReferenceNewBalloon();
     }
 
     public void ToggleBuyBalloonButton()

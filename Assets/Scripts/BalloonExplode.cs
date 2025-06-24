@@ -23,7 +23,6 @@ public class BalloonExplode : MonoBehaviour
         balloonCashout = GameObject.Find("BalloonController").GetComponent<BalloonCashout>();
         thresholdSlider = GameObject.Find("Backing").GetComponent<Slider>();
         balloonProbability = GameObject.Find("BalloonController").GetComponent<BalloonProbability>();
-        explodeMultiplier = 1.5f;
     }
 
     // Update is called once per frame
@@ -39,15 +38,6 @@ public class BalloonExplode : MonoBehaviour
         }
 
         thresholdSlider.value = currentExplodeThreshold * -1;
-
-        if (balloonProbability.isFixed == true)
-        {
-            explodeMultiplier = 1.5f;
-        }
-        else
-        {
-            explodeMultiplier = 1.25f;
-        }
     }
 
     public void RaiseThreshold(int pumpCount)

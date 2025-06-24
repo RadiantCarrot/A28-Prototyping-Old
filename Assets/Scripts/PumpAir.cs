@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PumpAir : MonoBehaviour
 {
@@ -26,7 +25,6 @@ public class PumpAir : MonoBehaviour
     void Start()
     {
         pumpAnimator = GetComponent<Animator>();
-        pumpValueMult = 0.25f;
     }
 
     // Update is called once per frame
@@ -36,16 +34,11 @@ public class PumpAir : MonoBehaviour
         if (balloonValue != null)
         {
             float potentialValue = pumpValueBase + 0.25f + pumpCount * pumpValueMult;
-            potentialValueText.text = "(+$" + potentialValue.ToString("F2") + ")";
-        }
-
-        if (balloonProbability.isFixed == true)
-        {
-            pumpValueMult = 0.25f;
+            potentialValueText.text = "Next Pump: +$" + potentialValue.ToString("F2");
         }
         else
         {
-            pumpValueMult = 0.4f;
+            potentialValueText.text = "Buy New Balloon!";
         }
     }
 
