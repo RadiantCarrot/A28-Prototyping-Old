@@ -33,7 +33,6 @@ public class BalloonProbability : MonoBehaviour
         pumpAir = GameObject.Find("Pump").GetComponent<PumpAir>();
         balloonCashout = GameObject.Find("BalloonController").GetComponent<BalloonCashout>();
 
-        //CalculateRTP(explodeMultiplier, pumpValueBase, pumpValueMult, maxPumps, entryCost);
         NewRTP(startingRTP);
         RTPSlider.onValueChanged.AddListener(OnSliderValueChanged);
 
@@ -96,9 +95,6 @@ public class BalloonProbability : MonoBehaviour
         }
 
         // If best match found after loop
-        //explodeMultiplier = bestExplode;
-        //pumpValueMult = bestPumpMult;
-
         double finalRTP = CalculateRTP(bestExplode, pumpValueBase, bestPumpMult, maxPumps, entryCost);
         Debug.Log($"Best Match: RTP={finalRTP:F2}%, Explode={bestExplode}, PumpMult={bestPumpMult}");
     }
@@ -134,7 +130,6 @@ public class BalloonProbability : MonoBehaviour
 
         // Return RTP as a percentage
         Debug.Log("RTP =" + (cumulativeEV / entryCost) * 100.0);
-        //RTPSlider.value = (float)(cumulativeEV / entryCost * 100.0);
         return (cumulativeEV / entryCost) * 100.0;
     }
 }
