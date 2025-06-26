@@ -12,6 +12,9 @@ public class CameraShake : MonoBehaviour
     void Start()
     {
         originalPos = transform.localPosition;
+
+        // Call cam shake with this in a different script
+        //FindObjectOfType<CameraShake>().TriggerShake(0.2f, 0.1f);
     }
 
     void Update()
