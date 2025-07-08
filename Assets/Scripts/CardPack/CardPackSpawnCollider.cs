@@ -7,22 +7,6 @@ public class CardPackSpawnCollider : MonoBehaviour
     public int spawnpointNumber;
 
 
-    //public void OnTriggerExit2D(Collider2D other)
-    //{
-    //    if (other.gameObject.tag == "CardPack")
-    //    {
-    //        other.gameObject.GetComponent<CardPackSelect>().packPosition = spawnpointNumber;
-    //        if (spawnpointNumber == 1)
-    //        {
-    //            other.gameObject.GetComponent<CardPackSelect>().isFrontPack = true;
-    //        }
-    //        else
-    //        {
-    //            other.gameObject.GetComponent<CardPackSelect>().isFrontPack = false;
-    //        }
-
-    //    }
-    //}
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "CardPack")
@@ -39,6 +23,4 @@ public class CardPackSpawnCollider : MonoBehaviour
             other.gameObject.GetComponent<CardPackSelect>().packPosition = spawnpointNumber;
         }
     }
-
-
 }
